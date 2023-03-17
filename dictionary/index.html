@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SeDictionary</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <!--main-->
+    <!--header-->
+    <header class="header-block">
+      <!--logo header-->
+      <img
+        src="./media/logo.png"
+        alt="firm logo"
+        width="100px"
+        height="100px"
+        class="h-logo"
+      />
+      <!--title header-->
+      <div class="h-title">
+        <h1>Dictionary IV Art</h1>
+        <h2>English -> Ukrainian</h2>
+      </div>
+      <!--menu header-->
+      <nav class="h-menu">
+        <ul class="h-list">
+          <li class="h-list-element">
+            <a href="index2.html"
+              ><p class="h-list-element-content">Ukrainian -> English</p>
+              <p></p
+            ></a>
+          </li>
+          <li class="h-list-element">
+            <a href="./seivartblog/index.html"
+              ><p class="h-list-element-content">About me</p></a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!------------------------------------------------------------------------------------------>
+
+    <main class="main-block">
+      <div class="m-vision">
+        <table class="m-table">
+          <tr>
+            <th><h3>English</h3></th>
+            <th><h3>Ukrainian</h3></th>
+          </tr>
+        </table>
+      </div>
+
+      <div class="m-input">
+        <form method="post" action="script/script.js" class="m-form">
+          <label for="engwd"><h3>English:</h3></label><br />
+          <input type="text" id="fword_id" name="fword" /><br />
+          <label for="uawd"><h3>Ukraine:</h3></label><br />
+          <input type="text" id="sword_id" name="sword" /><br />
+          <input type="submit" value="Add New Word" />
+        </form>
+      </div>
+    </main>
+
+    <!------------------------------------------------------------------------------------------>
+
+    <footer class="footer-block">
+      <div>
+        <address></address>
+      </div>
+    </footer>
+  </body>
+</html>
