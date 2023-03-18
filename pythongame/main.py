@@ -1,4 +1,5 @@
 import random
+from os import listdir
 import pygame
 from pygame.constants import QUIT, K_DOWN, K_UP, K_LEFT, K_RIGHT
 
@@ -6,6 +7,8 @@ from pygame.constants import QUIT, K_DOWN, K_UP, K_LEFT, K_RIGHT
 color = {"Black": (0, 0, 0), "White": (255, 255, 255),
          "Blue": (0, 0, 255), "Yellow": (255, 255, 0), "Red": (255, 0, 0), "Green": (0, 255, 0)}
 is_working = True
+PATH_PLAYER = 'goose'
+render_process = 0
 
 #start
 pygame.init()
@@ -26,7 +29,8 @@ bg_x = bg.get_width()
 bg_speed = 3
 
 # hero
-player = pygame.image.load("player.png").convert_alpha()
+player_render = [pygame.image.load(PATH_PLAYER+'/'+file).convert_alpha() for file in listdir(PATH_PLAYER)]
+player = player_render[render_process]
 player_rect = player.get_rect()
 player_speed = 5
 
@@ -53,10 +57,13 @@ def create_bonus():
     return [bonus, bonus_rect, bonus_speed]
 
 #events init
-CREATE_EVENT_AI = pygame.USEREVENT + 1
-CREATE_EVENT_BONUS = pygame.USEREVENT +2
-pygame.time.set_timer(CREATE_EVENT_AI, 1500)
-pygame.time.set_timer(CREATE_EVENT_BONUS, 3000)
+EVENT_CREATE_AI = pygame.USEREVENT + 1
+EVENT_CREATE_BONUS = pygame.USEREVENT +2
+EVENT_RENDER_PLAYER = pygame.USEREVENT +3
+
+pygame.time.set_timer(EVENT_CREATE_AI, 1500)
+pygame.time.set_timer(EVENT_CREATE_BONUS, 3000)
+pygame.time.set_timer(EVENT_RENDER_PLAYER, 125)
 
 
 
@@ -67,13 +74,18 @@ while is_working:
     for event in pygame.event.get():
         if event.type == QUIT:  # exit
             is_working = False
-        if event.type == CREATE_EVENT_AI:  # createai
+        if event.type == EVENT_CREATE_AI:  # createai
             enemies.append(create_enemy())
-        if event.type == CREATE_EVENT_BONUS:
+        if event.type == EVENT_CREATE_BONUS:
             bonuses.append(create_bonus())
+        if event.type == EVENT_RENDER_PLAYER:
+            if render_process == len(player_render)-1:
+                render_process = 0
+            else:
+                render_process +=1
+            player = player_render[render_process]
+        
     # init bg
-
-
     bg_x0 -= bg_speed
     bg_x -= bg_speed
     if bg_x0 < -bg.get_width():
@@ -128,6 +140,7 @@ while is_working:
    #     player_speed[0] = -player_speed[0]
    #     player.fill(color["Yellow"])
  ################################################
+    # player = pygame.image.load("player.png").convert_alpha()
     # player = pygame.Surface((20, 20))
     # player.fill(color["White"])
     # enemy = pygame.Surface((20, 20))
