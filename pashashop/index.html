@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ua">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Калькулятор</title>
+    <script src="./scripts/engine.js"></script>
+  </head>
+  <body>
+    <header>
+      <h2>металева сітка для пакування комів</h2>
+	  <address> м. Черкаси </address>
+    </header>
+    <main>
+      <h1>Генератор замовлення(Beta)</h1>
+      <form>
+        <label for="size_prod">Діаметр для кому</label>
+        <input id="size_prod" list="size_prod2" /><br />
+        <datalist id="size_prod2">
+          <option value="120"></option>
+          <option value="110"></option>
+          <option value="100"></option>
+          <option value="90"></option>
+          <option value="80"></option>
+          <option value="70"></option>
+          <option value="60"></option>
+          <option value="50"></option>
+          <option value="45"></option>
+          <option value="35"></option>
+        </datalist>
+        <label for="size_wire">Діаметр дроту</label>
+        <input id="size_wire" list="size_wire1" /><br />
+        <datalist id="size_wire1">
+          <option value="1,4"></option>
+          <option value="1,2"></option>
+        </datalist>
+        <input type="button" onclick="main()" value="розрахувати" />
+      </form>
+      <form>
+        <label for="res_pr">Ціна за одну шт кому:</label>
+        <input type="text" id="res_pr" readonly /><br />
+        <label for="res_min">Мінімальна кількість:</label>
+        <input type="number" id="res_min" disabled /><br />
+        <input
+          type="button"
+          id="bttn_ttl"
+          onclick="total()"
+          value="Сума замовлення:"
+          disabled
+        />
+      </form>
+      <article id="total_res"></article>
+    </main>
+  </body>
+</html>

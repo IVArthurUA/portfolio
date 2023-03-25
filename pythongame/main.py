@@ -1,7 +1,22 @@
 import random
-from os import listdir
+import os
+import sys
+from os import *
 import pygame
 from pygame.constants import QUIT, K_DOWN, K_UP, K_LEFT, K_RIGHT
+
+#dbug
+
+
+def resource_path(relative):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative)
+
+
+
 
 #vars
 color = {"Black": (0, 0, 0), "White": (255, 255, 255),
@@ -23,13 +38,14 @@ scores_font = pygame.font.SysFont("Verdana", 20)
 
 
 # bg
-bg = pygame.transform.scale(pygame.image.load("background.png").convert(), screen)
+bg = pygame.transform.scale(pygame.image.load(resource_path("background.png")).convert(), screen)
 bg_x0 = 0
 bg_x = bg.get_width()
 bg_speed = 3
 
 # hero
-player_render = [pygame.image.load(PATH_PLAYER+'/'+file).convert_alpha() for file in listdir(PATH_PLAYER)]
+player_render = [pygame.image.load(resource_path(
+    os.path.join(PATH_PLAYER, file))).convert_alpha() for file in listdir(resource_path(PATH_PLAYER))]
 player = player_render[render_process]
 player_rect = player.get_rect()
 player_speed = 5
@@ -39,7 +55,7 @@ enemies = []
 
 
 def create_enemy():  
-    enemy = pygame.image.load("enemy.png").convert_alpha()
+    enemy = pygame.image.load(resource_path("enemy.png")).convert_alpha()
     enemy_rect = pygame.Rect(
         weight, random.randint(0, height-enemy.get_width()), *enemy.get_size())
     enemy_speed = random.randint(2, 5)
@@ -51,7 +67,7 @@ bonuses = []
 
 
 def create_bonus():
-    bonus = pygame.image.load("bonus.png").convert_alpha()
+    bonus = pygame.image.load(resource_path("bonus.png")).convert_alpha()
     bonus_rect = pygame.Rect(random.randint(0, weight-bonus.get_width()), 0, *bonus.get_size())
     bonus_speed = random.randint(1, 3)
     return [bonus, bonus_rect, bonus_speed]
